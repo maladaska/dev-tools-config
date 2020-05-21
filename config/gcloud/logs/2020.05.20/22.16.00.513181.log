@@ -1,0 +1,106 @@
+2020-05-20 22:16:00,535 DEBUG    root            Loaded Command Group: [u'gcloud', u'init']
+2020-05-20 22:16:00,538 DEBUG    root            Running [gcloud.init] with arguments: []
+2020-05-20 22:16:00,538 INFO     ___FILE_ONLY___ Welcome! This command will take you through the configuration of gcloud.
+
+
+2020-05-20 22:16:00,543 INFO     ___FILE_ONLY___ Your current configuration has been set to: [default]
+
+
+2020-05-20 22:16:00,543 INFO     ___FILE_ONLY___ You can skip diagnostics next time by using the following flag:
+
+2020-05-20 22:16:00,543 INFO     ___FILE_ONLY___   gcloud init --skip-diagnostics
+
+
+2020-05-20 22:16:00,543 INFO     ___FILE_ONLY___ Network diagnostic detects and fixes local network connection issues.
+
+2020-05-20 22:16:00,545 INFO     ___FILE_ONLY___ Checking network connection...
+2020-05-20 22:16:03,199 INFO     ___FILE_ONLY___ Reachability Check passed.
+
+2020-05-20 22:16:03,200 INFO     ___FILE_ONLY___ Network diagnostic passed (1/1 checks passed).
+
+
+2020-05-20 22:16:07,113 DEBUG    root            Loaded Command Group: [u'gcloud', u'auth']
+2020-05-20 22:16:07,779 DEBUG    root            Loaded Command Group: [u'gcloud', u'auth', u'login']
+2020-05-20 22:16:07,782 INFO     root            Executing: [gcloud auth login --force --brief]
+2020-05-20 22:16:07,787 DEBUG    root            Running [gcloud.auth.login] with arguments: [--brief: "True", --force: "True"]
+2020-05-20 22:16:08,398 INFO     ___FILE_ONLY___ Your browser has been opened to visit:
+
+    https://accounts.google.com/o/oauth2/auth?code_challenge=QcQ44mrKVd5oEiF-QJ6qTIpR4hfycRO-tQ6QRerNzuA&prompt=select_account&code_challenge_method=S256&access_type=offline&redirect_uri=http%3A%2F%2Flocalhost%3A8085%2F&response_type=code&client_id=32555940559.apps.googleusercontent.com&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth
+
+
+
+2020-05-20 22:16:16,581 INFO     oauth2client.client Successfully retrieved access token
+2020-05-20 22:16:16,607 INFO     root            Display format: "none"
+2020-05-20 22:16:16,623 DEBUG    root            Checking for updates...
+2020-05-20 22:16:16,791 DEBUG    root            Updating notification cache...
+2020-05-20 22:16:16,795 INFO     ___FILE_ONLY___ You are logged in as: [a.kaoullas@gmail.com].
+
+
+2020-05-20 22:16:32,189 INFO     ___FILE_ONLY___ Your current project has been set to: [steel-flare-277814].
+
+
+2020-05-20 22:16:32,315 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute']
+2020-05-20 22:16:32,321 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'project_info']
+2020-05-20 22:16:32,363 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'project-info', u'describe']
+2020-05-20 22:16:32,364 INFO     root            Executing: [gcloud compute project-info describe --quiet]
+2020-05-20 22:16:32,367 DEBUG    root            Running [gcloud.compute.project-info.describe] with arguments: [--no-user-output-enabled: "false", --quiet: "True", --verbosity: "none"]
+2020-05-20 22:16:33,286 INFO     root            Display disabled.
+2020-05-20 22:16:38,329 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'zones']
+2020-05-20 22:16:38,333 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'zones', u'list']
+2020-05-20 22:16:38,336 INFO     root            Executing: [gcloud compute zones list]
+2020-05-20 22:16:38,340 DEBUG    root            Running [gcloud.compute.zones.list] with arguments: [--no-user-output-enabled: "false", --verbosity: "none"]
+2020-05-20 22:16:38,355 INFO     root            Display disabled.
+2020-05-20 22:17:11,203 INFO     ___FILE_ONLY___ Your project default Compute Engine zone has been set to [europe-west4-c].
+You can change it by running [gcloud config set compute/zone NAME].
+
+
+2020-05-20 22:17:11,206 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'regions']
+2020-05-20 22:17:11,211 DEBUG    root            Loaded Command Group: [u'gcloud', u'compute', u'regions', u'describe']
+2020-05-20 22:17:11,213 INFO     root            Executing: [gcloud compute regions describe https://www.googleapis.com/compute/v1/projects/steel-flare-277814/regions/europe-west4]
+2020-05-20 22:17:11,217 DEBUG    root            Running [gcloud.compute.regions.describe] with arguments: [--no-user-output-enabled: "false", --verbosity: "none", NAME: "https://www.googleapis.com/compute/v1/projects/steel-flare-277814/regions/europe-west4"]
+2020-05-20 22:17:11,892 INFO     root            Display disabled.
+2020-05-20 22:17:11,913 INFO     ___FILE_ONLY___ Your project default Compute Engine region has been set to [europe-west4].
+You can change it by running [gcloud config set compute/region NAME].
+
+
+2020-05-20 22:17:11,913 DEBUG    root            Executing command: [u'/Users/adamk/Applications/google-cloud-sdk/bin/gsutil', u'config', u'-n', u'-o', u'/Users/adamk/.boto']
+2020-05-20 22:17:33,996 DEBUG    ___FILE_ONLY___ 
+2020-05-20 22:17:33,996 DEBUG    ___FILE_ONLY___ This command will create a boto config file at /Users/adamk/.boto
+containing your credentials, based on your responses to the following
+questions.
+
+Boto config file "/Users/adamk/.boto" created. If you need to use a
+proxy to access the Internet please see the instructions in that file.
+
+2020-05-20 22:17:33,997 INFO     ___FILE_ONLY___ Created a default .boto configuration file at [/Users/adamk/.boto]. See this file and
+[https://cloud.google.com/storage/docs/gsutil/commands/config] for more
+information about configuring Google Cloud Storage.
+
+2020-05-20 22:17:33,997 INFO     ___FILE_ONLY___ Your Google Cloud SDK is configured and ready to use!
+
+
+2020-05-20 22:17:33,997 INFO     ___FILE_ONLY___ * Commands that require authentication will use a.kaoullas@gmail.com by default
+
+2020-05-20 22:17:33,998 INFO     ___FILE_ONLY___ * Commands will reference project `steel-flare-277814` by default
+
+2020-05-20 22:17:33,998 INFO     ___FILE_ONLY___ * Compute Engine commands will use region `europe-west4` by default
+
+2020-05-20 22:17:33,998 INFO     ___FILE_ONLY___ * Compute Engine commands will use zone `europe-west4-c` by default
+
+
+2020-05-20 22:17:33,999 INFO     ___FILE_ONLY___ Run `gcloud help config` to learn how to change individual settings
+
+
+2020-05-20 22:17:33,999 INFO     ___FILE_ONLY___ This gcloud configuration is called [default]. You can create additional configurations if you work with multiple accounts and/or projects.
+
+2020-05-20 22:17:33,999 INFO     ___FILE_ONLY___ Run `gcloud topic configurations` to learn more.
+
+
+2020-05-20 22:17:34,000 INFO     ___FILE_ONLY___ Some things to try next:
+
+
+2020-05-20 22:17:34,000 INFO     ___FILE_ONLY___ * Run `gcloud --help` to see the Cloud Platform services you can interact with. And run `gcloud help COMMAND` to get help on any gcloud command.
+
+2020-05-20 22:17:34,000 INFO     ___FILE_ONLY___ * Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
+
+2020-05-20 22:17:34,003 INFO     root            Display format: "default"
