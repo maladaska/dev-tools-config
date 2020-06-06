@@ -29,3 +29,5 @@ tree: brew install tree
 pip: python3 -m pip install --upgrade pip
 ctop: brew install ctop
 
+# Open MD preview 
+cmd-k v
