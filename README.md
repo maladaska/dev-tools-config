@@ -4,6 +4,9 @@ Xcode command line tools
 # dev-tools-config
 Settings for various dev tools used.
 
+# Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 
 # Setting up dev environment
 https://medium.com/@bschlining/my-macos-development-environment-of-2018-acf9c7537a58
