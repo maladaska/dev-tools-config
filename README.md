@@ -1,3 +1,6 @@
+# Core tools
+Xcode command line tools
+
 # dev-tools-config
 Settings for various dev tools used.
 
