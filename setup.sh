@@ -1,18 +1,35 @@
 # Setup brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# install pip
-python get-pip.py
+export PATH=/opt/homebrew/bin/brew:$PATH
+
+# Install XCode Command line tools
+xcode-select --install
+
+# install python
+brew install python
 
 #install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+brew install nvm
 
 # install node with nvm
-nvm install node # "node" is an alias for the latest version
 brew install node
 
 
 brew install neovim
+
+# INstall Eclipse
+brew install --cask eclipse-java
+
+# Install Intellij
+brew install --cask intellij-idea
+
+#Install VS Code
+brew install --cask visual-studio-code
+
+#iterm 2
+brew install --cask iterm2
+
 
 # ctop container top
 curl -sSl https://raw.githubusercontent.com/yadutaf/ctop/master/cgroup_top.py > /opt/ctop && python /opt/ctop
@@ -25,4 +42,3 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 # Install Powerlevel 10k - 
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-
