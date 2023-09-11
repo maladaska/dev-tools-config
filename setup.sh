@@ -1,44 +1,69 @@
-# Setup brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-export PATH=/opt/homebrew/bin/brew:$PATH
-
-# Install XCode Command line tools
-xcode-select --install
-
-# install python
-brew install python
-
-#install nvm
-brew install nvm
-
-# install node with nvm
-brew install node
 
 
-brew install neovim
+setup_brew() {
+    echo "...installing homebrew (and xcode command line tools if required)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Add to path now so that other functions from this script will work.
+    export PATH=/opt/homebrew/bin/brew:$PATH 
+    # Add Homebrew to your PATH in ~/.zprofile:
+    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> /Users/ad378529/.profile
+    eval "$(/usr/local/bin/brew shellenv)"
+}
 
-# INstall Eclipse
-brew install --cask eclipse-java
+setup_python() {
+    # install python
+    echo "...installing python with homebrew"
+    brew install python
+}
 
-# Install Intellij
-brew install --cask intellij-idea
+setup_node() {
+    echo "installing nvm."
+    #install nvm
+    brew install nvm
+    # install node with nvm
+    echo "...installing node."
+    brew install node
 
-#Install VS Code
-brew install --cask visual-studio-code
+}
 
-#iterm 2
-brew install --cask iterm2
+setup_finder_defaults() {
+    defaults write com.apple.Finder AppleShowAllFiles true
+    killall Finder
+}
+
+setup_terminal() {
+    #iterm 2
+    echo "...installing iterm2."
+    brew install --cask iterm2
+    #install oh my zsh
+    echo "...installing oh my zsh."
+    # Install Powerlevel 10k - Doing this in different order to what would normally be expected as installer
+    # changes shell which prevents rest of script being executed.
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+}
+setup_powerlevel10k_theme() {
+    brew install powerlevel10k
+    echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
+}
 
 
-# ctop container top
-curl -sSl https://raw.githubusercontent.com/yadutaf/ctop/master/cgroup_top.py > /opt/ctop && python /opt/ctop
+setup_eclipse() {
+    brew install --cask eclipse-jee
+}
 
-# syntax highligting for VIM
-echo "syntax on" >> ~/.vimrc
+setup_intellij() {
+    brew install --cask intellij-idea
+}
+setup_vscode() {
+    brew install --cask visual-studio-code
+}
+# brew install neovim
 
-#install oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# Install Powerlevel 10k - 
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+
+# # ctop container top
+# curl -sSl https://raw.githubusercontent.com/yadutaf/ctop/master/cgroup_top.py > /opt/ctop && python /opt/ctop
+
+# # syntax highligting for VIM
+# echo "syntax on" >> ~/.vimrcbre
