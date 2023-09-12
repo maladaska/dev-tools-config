@@ -17,9 +17,13 @@ This will give access to the following functions:
 | setup_intellij() | Download and install intellij ultimate via brew/cask |
 | setup_vscode() | Download and install VS Code via brew/cask |
 | setup_python() | Install python 3 and pip
-| setup_misc_utils() | `tldr` (Simplified man pages), `tree` (recursive tree like dir listing), `neovim` (vim replacement), `ctop` (top for containers) |
+| setup_misc_utils() | `tldr` (Simplified man pages), `tree` (recursive tree like dir listing), `neovim` (vim replacement), `ctop` (top for containers), `maven`, `postman` |
 | setup_node() | setup nvm and node | 
-| setup_config_defaults() | Useful helper function to set core defaults, e.g. show hidden files in finder. Will continue to add to this function.
+| setup_config_defaults() | Useful helper function to set core defaults, e.g. show hidden files in finder. Will continue to add to this function. |
+| setup_sdkman() | Install sdkma, pupular SDK manager for Java and other SDKs. |
+| setup_java() | Uses sdkman to install latest supported version of JDK. Calls setup_sdkman() first |
+
+
 
 
 

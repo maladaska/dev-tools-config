@@ -49,12 +49,36 @@ setup_intellij() {
 }
 setup_vscode() {
     brew install --cask visual-studio-code
+    # Add code to PATH in present shell and also to .zprofile
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    echo 
+    cat << EOF >> ~/.zprofile
+# Add Visual Studio Code (code) to PATH
+export PATH="$PATH"
+EOF
+}
+
+setup_vscode_extensions() {
+    code --install-extension vscjava.vscode-java-pack
+
 }
 
 setup_ides() {
     setup_eclipse
     setup_intellij
     setup_vscode
+}
+
+setup_sdkman() {
+    # first install sdkman - this helps manage different versions of java and other SDKs.
+    curl -s "https://get.sdkman.io" | bash
+    # Above will add to .zshrc but execurting below so available in current shell
+    source ~/.sdkman/bin/sdkman-init.sh 
+}
+
+setup_java() {
+    setup_sdkman
+    sdk install java
 }
 
 setup_misc_utils() {
@@ -67,4 +91,6 @@ setup_misc_utils() {
     echo "syntax on" >> ~/.vimrcbre
     # top like interface for container metrics
     brew install ctop
+    brew install --cask postman
+    brew install maven
 }
