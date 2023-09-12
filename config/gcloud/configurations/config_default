@@ -1,8 +1,0 @@
-[core]
-account = a.kaoullas@gmail.com
-project = steel-flare-277814
-
-[compute]
-zone = europe-west2-a
-region = europe-west2
-

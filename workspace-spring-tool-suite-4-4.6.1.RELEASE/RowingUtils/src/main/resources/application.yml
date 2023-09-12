@@ -1,8 +1,0 @@
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          strava:
-            clientId: 48169
-            clientSecret: ead60ab925a5fa4ee947d166dbd8f80d7a90f647
