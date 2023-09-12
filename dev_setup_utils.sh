@@ -53,6 +53,7 @@ setup_vscode() {
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     echo 
     cat << EOF >> ~/.zprofile
+
 # Add Visual Studio Code (code) to PATH
 export PATH="$PATH"
 EOF
@@ -60,7 +61,8 @@ EOF
 
 setup_vscode_extensions() {
     code --install-extension vscjava.vscode-java-pack
-
+    code --install github.copilot
+    code --install github.copilot-chat
 }
 
 setup_ides() {
