@@ -23,6 +23,7 @@ setup_node() {
     brew install node
 }
 
+
 setup_config_defaults() {
     defaults write com.apple.Finder AppleShowAllFiles true
     killall Finder
@@ -61,8 +62,10 @@ EOF
 
 setup_vscode_extensions() {
     code --install-extension vscjava.vscode-java-pack
-    code --install github.copilot
-    code --install github.copilot-chat
+    code --install-extension github.copilot
+    code --install-extension github.copilot-chat
+    code --install-extension github.copilot-labs
+    code --install-extension vscjava.vscode-spring-initializr
 }
 
 setup_ides() {
