@@ -4,10 +4,10 @@ setup_brew() {
     echo "...installing homebrew (and xcode command line tools if required)"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Add to path now so that other functions from this script will work.
-    export PATH=/opt/homebrew/bin/brew:$PATH 
+    export PATH=/usr/local/bin/brew:$PATH 
     # Add Homebrew to your PATH in ~/.zprofile:
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.profile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.profile
+    eval "$(/usr/local/bin/brew shellenv)"
 }
 
 setup_python() {
