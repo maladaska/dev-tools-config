@@ -8,6 +8,7 @@ setup_brew() {
     # Add Homebrew to your PATH in ~/.zprofile:
     (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.profile
     eval "$(/usr/local/bin/brew shellenv)"
+    echo "PATH updated: $PATH"
 }
 
 setup_python() {
