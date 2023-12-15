@@ -4,22 +4,25 @@ setup_brew() {
     echo "...installing homebrew (and xcode command line tools if required)"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Add to path now so that other functions from this script will work.
-    export PATH=/usr/local/bin/brew:$PATH 
-    # Add Homebrew to your PATH in ~/.zprofile:
-    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.profile
-    eval "$(/usr/local/bin/brew shellenv)"
+    HOMEBREW_PREFIX=`brew --prefix`
+    export PATH=$HOMEBREW_PREFIX/bin/brew:$PATH 
+    cat << EOF >> ~/.zshrc
+# Add homebrew  to Path
+export PATH=$HOMEBREW_PREFIX/bin/brew:\$PATH
+EOF
+    source . ~/.zshrc
     echo "PATH updated: $PATH"
 }
 
 setup_python() {
     echo "...installing python with homebrew"
-    brew install python3
+    brew install python3 --force
     python3 -m pip install --upgrade pip
 }
 
 setup_node() {
     echo "...installing nvm."
-    brew install nvm
+    brew install nvm --force
     echo "...installing node."
     brew install node
 }
@@ -32,32 +35,34 @@ setup_config_defaults() {
 
 setup_terminal() {
     echo "...installing iterm2."
-    brew install --cask iterm2
+    brew install --cask iterm2 --force
     echo "...installing oh my zsh."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    
+    brew install zsh-autocomplete --force
+    echo "source $(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" | cat - ~/.zshrc | tee ~/.zshrc 
+    source ~/.zshrc
 }
 
 setup_powerlevel10k_theme() {
-    brew install powerlevel10k
+    brew install powerlevel10k --force
     echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
 }
 
 setup_eclipse() {
-    brew install --cask eclipse-jee
+    brew install --cask eclipse-jee --force
 }
 
 setup_intellij() {
-    brew install --cask intellij-idea
+    brew install --cask intellij-idea --force
 }
 setup_vscode() {
-    brew install --cask visual-studio-code
+    brew install --cask visual-studio-code --force
     # Add code to PATH in present shell and also to .zprofile
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    echo 
-    cat << EOF >> ~/.zprofile
-
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" 
+    cat << EOF >> ~/.zshrc
 # Add Visual Studio Code (code) to PATH
-export PATH="$PATH"
+export PATH=$PATH
 EOF
 }
 
@@ -84,19 +89,47 @@ setup_sdkman() {
 
 setup_java() {
     setup_sdkman
+    # Install latest
     sdk install java
+    # Install Java 8.
+    sdk install java 8.0.372-tem
 }
 
 setup_misc_utils() {
     # recursive tree listing command
-    brew install tree
+    brew install tree --force
     # simplified man pages.
-    brew install tldr
+    brew install tldr --force
     # vim replacement
-    brew install neovim
+    brew install neovim --force
     echo "syntax on" >> ~/.vimrcbre
     # top like interface for container metrics
-    brew install ctop
-    brew install --cask postman
-    brew install maven
+    brew install ctop --force
+    brew install --cask postman --force
+    brew install maven --force
+    maven_version=`brew info maven --json | jq -r '.[].installed[].version'`
+    cat << EOF >> ~/.zshrc
+# Add Maven to Path
+MAVEN_HOME=$(brew --prefix)/Cellar/maven/$maven_version/bin
+export PATH=\$MAVEN_HOME/bin:\$PATH
+EOF
+    source ~/.zshrc
+    
+
+}
+
+setup_mysql() {
+    brew install mysql-client  --force
+    cat << EOF >> ~/.zshrc
+# Add MySql to PATH
+export PATH=$(brew --prefix)/opt/mysql-client/bin:\$PATH
+EOF
+    source ~/.zshrc
+
+    # Setup mysql workbench
+    brew install --cask mysqlworkbench --force
+}
+
+setup_tomcat() {
+    brew install tomcat@8
 }
