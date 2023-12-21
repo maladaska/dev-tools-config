@@ -91,11 +91,12 @@ setup_intellij() {
     brew install --cask intellij-idea --force
 }
 setup_vscode_extensions() {
-    code --install-extension vscjava.vscode-java-pack
-    code --install-extension github.copilot
-    code --install-extension github.copilot-chat
-    code --install-extension github.copilot-labs
-    code --install-extension vscjava.vscode-spring-initializr
+    code --install-extension vscjava.vscode-java-pack --force
+    code --install-extension github.copilot --force
+    code --install-extension github.copilot-chat --force
+    code --install-extension github.copilot-labs --force
+    code --install-extension vscjava.vscode-spring-initializr --force
+    code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools --force
 }
 setup_vscode() {
     brew install --cask visual-studio-code --force
