@@ -2,6 +2,10 @@
 
 A collection of helper functions to help setup core tools on a Mac
 
+## PreReqs
+* Xcode installed.
+  ```xcode-select --install```
+  
 ## Usage
 . ./dev_setup_utils.sh
 
