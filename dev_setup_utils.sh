@@ -3,15 +3,18 @@
 setup_brew() {
     echo "...installing homebrew (and xcode command line tools if required)"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Add to path now so that other functions from this script will work.
-    HOMEBREW_PREFIX=`brew --prefix`
-    export PATH=$HOMEBREW_PREFIX/bin/brew:$PATH 
+    # Add to path now so that other functions from this script will work. Note, on intel based macs this is different.
+    HOMEBREW_PREFIX=/opt/homebrew
+    export PATH=$HOMEBREW_PREFIX/bin:$PATH 
     cat << EOF >> ~/.zshrc
 # Add homebrew  to Path
-export PATH=$HOMEBREW_PREFIX/bin/brew:\$PATH
+export PATH=$HOMEBREW_PREFIX/bin:\$PATH
 EOF
-    source . ~/.zshrc
-    echo "PATH updated: $PATH"
+}
+
+setup_prereqs() {
+    xcode-select --install
+    softwareupdate --install-rosetta
 }
 
 brew_install() {
@@ -24,14 +27,14 @@ brew_install() {
             echo "Upgrade available from $installed_version to $latest_version. Upgrading..."
             brew update && brew upgrade $1 && brew cleanup $1
             # TODO - remove existing entry from path
-            add_to_path_zsh $1
+            #add_to_path_zsh $1
         else 
             echo "Latest version for $1 already installed ($installed_version)"
         fi
     else
         echo "Installing $1"
         brew install $1 && echo "$1 is installed"
-        add_to_path_zsh $1
+        #add_to_path_zsh $1
     fi
 }
 
@@ -64,7 +67,24 @@ setup_node() {
 
 setup_config_defaults() {
     defaults write com.apple.Finder AppleShowAllFiles true
+    defaults write -g com.apple.swipescrolldirection -bool NO
+    defaults write -g com.apple.trackpad.enable-natural-scrolling -bool NO
     killall Finder
+    killall Dock
+    killall -u $USER cfprefsd
+
+cat << EOF >> ~/.vimrc
+syntax on
+set number
+set showmatch
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set wrap
+set ruler
+set mouse=a
+set encoding=utf-8
+EOF
 }
 
 setup_terminal() {
@@ -72,16 +92,12 @@ setup_terminal() {
     brew install --cask iterm2 --force
     echo "...installing oh my zsh."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    
-    brew_install zsh-autocomplete
-    echo "source $(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" | cat - ~/.zshrc | tee ~/.zshrc 
-    source ~/.zshrc
+   
+#    brew_install zsh-autocomplete
+#    echo "source $(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" | cat - ~/.zshrc | tee ~/.zshrc 
+#    source ~/.zshrc
 }
 
-setup_powerlevel10k_theme() {
-    brew_install powerlevel10k
-    echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
-}
 
 setup_eclipse() {
     brew install --cask eclipse-jee --force
@@ -94,22 +110,24 @@ setup_vscode_extensions() {
     code --install-extension vscjava.vscode-java-pack --force
     code --install-extension github.copilot --force
     code --install-extension github.copilot-chat --force
-    code --install-extension github.copilot-labs --force
     code --install-extension vscjava.vscode-spring-initializr --force
     code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools --force
+    code --install-extension ms-azuretools.vscode-docker --force
 }
 setup_vscode() {
     brew install --cask visual-studio-code --force
     # Add code to PATH in present shell and also to .zprofile
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" 
+    export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH" 
     cat << EOF >> ~/.zshrc
 # Add Visual Studio Code (code) to PATH
-export PATH=$PATH
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:\$PATH"
 EOF
     source ~/.zshrc
     setup_vscode_extensions
 }
-
+setup_docker() {
+    brew install --cask docker
+}
 
 setup_ides() {
     setup_eclipse
@@ -125,11 +143,8 @@ setup_sdkman() {
 }
 
 setup_java() {
-    setup_sdkman
     # Install latest
     sdk install java
-    # Install Java 8.
-    sdk install java 8.0.372-tem
 }
 
 setup_misc_utils() {
@@ -139,11 +154,10 @@ setup_misc_utils() {
     brew_install jq
     # simplified man pages.
     brew_install tldr
-    # vim replacement
-    brew_install neovim
-    echo "syntax on" >> ~/.vimrcbre
     # top like interface for container metrics
     brew_install ctop
+    brew_install wget
+    brew_install htop
 }
 
 setup_mysql() {
@@ -153,7 +167,7 @@ setup_mysql() {
 }
 
 setup_tomcat() {
-    brew_install tomcat@8
+    brew_install tomcat@9
 }
 
 setup_browsers() {
@@ -162,7 +176,25 @@ setup_browsers() {
 }
 
 setup_dev_tools() {
+    setup_java
+    setup_node
+    setup_ides
     brew install --cask postman --force
     brew_install maven
     brew_install jmeter
+    setup_tomcat
+    setup_mysql
+    setup_docker
+    setup_python
+}
+
+first_time_setup() {
+    setup_prereqs
+    setup_brew
+    setup_sdkman
+    setup_terminal
+    setup_misc_utils
+    setup_browsers
+    setup_dev_tools
+    setup_config_defaults
 }
